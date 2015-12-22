@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.TicketReservation.Dao.UserDaoInterface;
+import com.TicketReservation.Dao.UserMovieDaoInt;
 import com.TicketReservation.Model.MovieList;
 import com.TicketReservation.Model.TimingModel;
 import com.TicketReservation.Model.UserDetails;
@@ -15,6 +16,9 @@ import com.TicketReservation.Model.UserDetails;
 public class UserImplementation implements UserInterface {
 	@Autowired
 	private UserDaoInterface userdao;
+	@Autowired
+	UserMovieDaoInt userdao1;
+	
 
 	// Register..................................
 	@Override
@@ -33,6 +37,7 @@ public class UserImplementation implements UserInterface {
 		String username = detail1.getUsername();
 		String password = detail1.getPassword();
 		int role = detail1.getRole();
+		int id=detail1.getId();
 		/*
 		 * System.out.println("aserg1 "+username);
 		 * System.out.println("aserg1 "+password);
@@ -47,6 +52,7 @@ public class UserImplementation implements UserInterface {
 
 			String msg = "user";
 			detail.setMsg(msg);
+			detail.setId(id);
 			return detail;
 		} else {
 			String msg = "Invalid Login";
@@ -56,38 +62,14 @@ public class UserImplementation implements UserInterface {
 
 	}
 
-	// insert and update movies............................
 	@Override
-	public MovieList movielist(MovieList list) {
+	public List<MovieList> movieList() {
 		// TODO Auto-generated method stub
-		int id = list.getMovie_id();
-		System.out.println(id);
-		return userdao.movielist(list);
-
+		return userdao1.movieList();
+		
 	}
 
-	// list of movies...............................
-	@Override
-	public List<MovieList> movielists() {
-		// TODO Auto-generated method stub
-		return userdao.movielists();
-
-	}
-
-	// insert and update the time..................................
-	@Override
-	public TimingModel timing(TimingModel time) {
-		// TODO Auto-generated method stub
-		return userdao.timing(time);
-
-	}
-
-	// list of times......................................
-	@Override
-	public List<TimingModel> timelist() {
-		// TODO Auto-generated method stub
-		return userdao.timelist();
-
-	}
+	
+	
 
 }

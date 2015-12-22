@@ -15,5 +15,6 @@
 	</form>
 	${msg}
 	${msg1}
+	${log }
 </body>
 </html>

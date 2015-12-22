@@ -16,12 +16,6 @@ public interface UserDaoInterface {
 
 	public UserDetails login(String name);
 
-	public MovieList movielist(MovieList list);
-
-	public List<MovieList> movielists();
-
-	public TimingModel timing(TimingModel time);
-
-	public List<TimingModel> timelist();
-
+	
+	
 }

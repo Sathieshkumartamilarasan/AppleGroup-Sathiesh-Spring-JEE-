@@ -17,14 +17,9 @@ public interface UserInterface {
 
 	public UserDetails login(UserDetails detail);
 
-	public MovieList movielist(MovieList list);
+	public List<MovieList> movieList();
 
-	public List<MovieList> movielists();
-
-	public TimingModel timing(TimingModel time);
-
-	public List<TimingModel> timelist();
-
+	
 	
 	
 

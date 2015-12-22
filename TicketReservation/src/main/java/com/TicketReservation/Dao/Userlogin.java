@@ -13,6 +13,7 @@ public class Userlogin implements RowMapper {
 		detail.setUsername(rs.getString("username"));
 		detail.setPassword(rs.getString("password"));
 		detail.setRole(rs.getInt("role_RoleId"));
+		detail.setId(rs.getInt("id"));
 		//System.out.println("dadsdbasbdsajbdjsa" + rs.getString("username"));
 		//System.out.println("dadsdbasbdsajbdjsa" + rs.getString("password"));
 		//System.out.println("dadsdbasbdsajbdjsa" + rs.getInt("Role_RoleId"));

@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Calendar;
 public class UserDetails {
+	private Date date1;
 	    private int role;
         private String msg;
 	    private int roleid=1;
@@ -20,6 +21,12 @@ public class UserDetails {
 	    private String updateddate;
 	    
 	    
+		public Date getDate1() {
+			return date1;
+		}
+		public void setDate1(Date date1) {
+			this.date1 = date1;
+		}
 		public int getRole() {
 			return role;
 		}

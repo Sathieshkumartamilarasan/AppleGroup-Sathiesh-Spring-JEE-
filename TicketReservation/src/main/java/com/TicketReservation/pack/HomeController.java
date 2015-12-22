@@ -45,15 +45,21 @@ public class HomeController {
 	public ModelAndView login(UserDetails detail) {
 		userimplement.login(detail);
 		String msg = detail.getMsg();
-		ModelAndView view = new ModelAndView();
-		// System.out.println("aserg "+msg);
+		int id = detail.getId();
 		if (msg.equals("admin")) {
-			view.setViewName("Admin");
-			return view;
+			// view.setViewName("Admin");
+			return new ModelAndView("redirect:/List");
 		}
 		if (msg.equals("user")) {
-			view.setViewName("User");
-			return view;
+
+			List<MovieList> list = userimplement.movieList();
+			System.out.println(list);
+			System.out.println(id);
+			ModelAndView model = new ModelAndView();
+			model.addObject("list1", list);
+			model.addObject("id", id);
+			model.setViewName("UserMovie");
+			return model;
 		} else {
 
 			return new ModelAndView("home", "msg1", msg);
@@ -61,72 +67,10 @@ public class HomeController {
 		}
 	}
 
-	// MovieLists..............
-	@RequestMapping(value = "/movie", method = RequestMethod.GET)
-	public ModelAndView movieList(@RequestParam("movie_id") int id) {
-		//System.out.println(id);
-		return new ModelAndView("MovieList", "movie_id", id);
-	}
-	
-	@RequestMapping(value="/movies",method=RequestMethod.GET)
-	public ModelAndView addMovie(){
-		ModelAndView mav2=new ModelAndView();
-		mav2.setViewName("MovieList");
-		return mav2;
-	}
-
-	// insert and update for MovieList................................
-
-	@RequestMapping(value = "/movielist", method = RequestMethod.POST)
-	public ModelAndView movielist(@ModelAttribute MovieList list) {
-		// int id = list.getMovie_id();
-		 //System.out.println(id);
-		userimplement.movielist(list);
-		String msg1 = "inserted";
-		return new ModelAndView("Admin", "list1", msg1);
-
-	}
-
-	// List of Movies..........................
-
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
-		List<MovieList> list1 = userimplement.movielists();
-		System.out.println(list1);
-
-		return new ModelAndView("MovList", "list", list1);
-	}
-
-	// timings..............
-	@RequestMapping(value = "/time", method = RequestMethod.GET)
-	public ModelAndView time(@RequestParam("timings_id") int id) {
-		//System.out.println(id);
-		return new ModelAndView("Timing", "timings_id", id);
-	}
-	
-	@RequestMapping(value="/times",method=RequestMethod.GET)
-	public ModelAndView addTime(){
-		ModelAndView mav3=new ModelAndView();
-		mav3.setViewName("Timing");
-		return mav3;
-	}
-
-	// insert and update for timings................................
-	@RequestMapping(value = "/timing1", method = RequestMethod.POST)
-	public ModelAndView timing(@ModelAttribute TimingModel time) {
-		//int id = time.getTimings_id();
-		//System.out.println(id);
-		userimplement.timing(time);
-		String insert = "inserted";
-		return new ModelAndView("Admin", "insert", insert);
-
-	}
-
-	// List of Timings..........................
-	@RequestMapping(value = "/timelist", method = RequestMethod.GET)
-	public ModelAndView timelist() {
-		List<TimingModel> time = userimplement.timelist();
-		return new ModelAndView("TimingList", "time", time);
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView logout() {
+		String log = "Logged Out Successfully";
+		return new ModelAndView("home", "log", log);
 
 	}
 
